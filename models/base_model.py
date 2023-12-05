@@ -11,27 +11,25 @@ from datetime import datetime
 
 class BaseModel():
     """Class BaseModel define all common attributes/methods"""
-    id = str(uuid.uuid4())
-    created_at = datetime.now()
-    updated_at = created_at
 
     def __init__(self, *args, **kwargs):
         """ Constructor """
-        if kwargs:
+        if kwargs and kwargs != {}:
             for attr_name, attr_value in kwargs.items():
                 if attr_name != "__class__":
                     if attr_name in ("created_at", "updated_at"):
                         attr_value = datetime.strptime(attr_value, "%Y-%m-%dT%H:%M:%S.%f")
-                    setattr(self, attr_name, attr_value)
+                    self.__dict__[attr_name] = kwargs[attr_name]
 
         else:
-            id = str(uuid.uuid4())
-            created_at = datetime.now()
+            self.id = str(uuid.uuid4())
+            self.created_at = datetime.now()
+            self.updated_at = self.created_at
 
 
     def __str__(self):
         """Representation of class BaseModel"""
-        return f"[BaseModel] ({self.id}) {self.__dict__}"
+        return f"[{__class__.__name__}] ({self.id}) {self.__dict__}"
 
     def save(self):
         """Update public instance attribute updated_at"""
