@@ -7,6 +7,7 @@ Parent class (called BaseModel) to take care of instances's:
 """
 import uuid
 from datetime import datetime
+from models import storage
 
 
 class BaseModel():
@@ -33,6 +34,7 @@ class BaseModel():
 
     def save(self):
         """Update public instance attribute updated_at"""
+        storage.save()
         self.updated_at = datetime.datetime.now()
 
     def to_dict(self):
