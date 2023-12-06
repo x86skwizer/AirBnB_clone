@@ -13,19 +13,19 @@ class FileStorage():
 
     def all(self):
         """returns the dictionary __objects"""
-        return __objects
+        return self.__objects
 
     def new(self, obj):
         """sets in __objects the obj with key"""
         key = obj.__class__.name + "." + obj.id
-        __objects[key] = obj
+        self.__objects[key] = obj
 
     def save(self):
         """serializes __objects to the JSON file"""
-        with open( __file_path , "w" ) as write_file:
-            json.dump(__objects, write_file)
+        with open( self.__file_path , "w" ) as write_file:
+            json.dump(self.__objects, write_file)
 
     def reload(self):
         """deserializes the JSON file to __objects"""
-        with open( __file_path , "r" ) as read_file:
-            __objects = json.load(read_file)
+        with open( self.__file_path , "r" ) as read_file:
+            self.__objects = json.load(read_file)
