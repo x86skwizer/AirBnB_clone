@@ -18,8 +18,7 @@ class FileStorage():
     def new(self, obj):
         """sets in __objects the obj with key"""
         key = str(obj.__class__.__name__) + "." + str(obj.id)
-        self.__objects[key] = str(obj.to_dict)
-
+        self.__objects[key] = obj.to_dict()
 
     def save(self):
         """serializes __objects to the JSON file"""
@@ -30,6 +29,6 @@ class FileStorage():
         """deserializes the JSON file to __objects"""
         try:
             with open( self.__file_path , "r" ) as read_file:
-                self.__objects = json.loads(read_file)
+                self.__objects = json.load(read_file)
         except:
             pass
