@@ -5,4 +5,5 @@ Create a unique FileStorage instance for your application
 from models.engine.file_storage  import FileStorage
 
 
-storage = FileStorage.reload()
+storage = FileStorage
+storage.reload()
