@@ -7,7 +7,7 @@ import json
 
 class FileStorage():
     """Class serialize instances to JSON file"""
-    
+
     __file_path = "file.json"
     __objects = {}
 
@@ -33,5 +33,5 @@ class FileStorage():
             with open( self.__file_path , "r" ) as read_file:
                 from models.base_model import BaseModel
                 self.__objects = {key: BaseModel(**value) for key, value in json.load(read_file).items()}
-        except:
+        except (FileNotFoundError):
             pass
