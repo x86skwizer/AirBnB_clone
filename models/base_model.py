@@ -18,9 +18,9 @@ class BaseModel():
         if kwargs and kwargs != {}:
             for attr_name, attr_value in kwargs.items():
                 if attr_name != "__class__":
-                    if attr_name in ("created_at", "updated_at"):
+                    if attr_name in ("created_at", "updated_at", ):
                         attr_value = datetime.strptime(attr_value, "%Y-%m-%dT%H:%M:%S.%f")
-                    self.__dict__[attr_name] = kwargs[attr_name]
+                    self.__dict__[attr_name] = attr_value
 
         else:
             self.id = str(uuid.uuid4())
@@ -35,8 +35,8 @@ class BaseModel():
 
     def save(self):
         """Update public instance attribute updated_at"""
-        storage.save()
         self.updated_at = datetime.now()
+        storage.save()
 
     def to_dict(self):
         """Return a dictionnary of __dict__ of the instance"""

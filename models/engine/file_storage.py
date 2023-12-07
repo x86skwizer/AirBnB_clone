@@ -18,17 +18,20 @@ class FileStorage():
     def new(self, obj):
         """sets in __objects the obj with key"""
         key = str(obj.__class__.__name__) + "." + str(obj.id)
-        self.__objects[key] = obj.to_dict()
+        self.__objects[key] = obj
 
     def save(self):
         """serializes __objects to the JSON file"""
+        tmp = {}
         with open( self.__file_path , "w" ) as write_file:
-            json.dump(self.__objects, write_file)
+            tmp = {key: value.to_dict() for key,value in self.__objects.items()}
+            json.dump(tmp, write_file)
 
     def reload(self):
         """deserializes the JSON file to __objects"""
         try:
             with open( self.__file_path , "r" ) as read_file:
-                self.__objects = json.load(read_file)
+                from models.base_model import BaseModel
+                self.__objects = {key: BaseModel(**value) for key, value in json.load(read_file).items()}
         except:
             pass
