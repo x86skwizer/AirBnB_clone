@@ -7,20 +7,21 @@ import cmd
 
 class HBNBCommand(cmd.Cmd):
     """command interpreter's class HBNBCommand"""
-    prompt = '(hbnb) ' 
-    def do_greet(self, person):
-        """greet [person]
-        Greet the named person"""
-        if person:
-            print (f"hi, {person}")
-        else:
-            print ("hi")
-    
+
+    prompt = '(hbnb) '
+
     def do_EOF(self, line):
+        """EOF command to exit the program
+        """
         return True
-    
-    def postloop(self):
-        print
+
+    def do_quit(self, line):
+        """Quit command to exit the program
+        """
+        return True
+
+    def emptyline(self):
+        return False
 
 if __name__ == '__main__':
     HBNBCommand().cmdloop()
