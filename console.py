@@ -5,6 +5,7 @@ Program called console.py that contains the entry point of the command interpret
 import cmd
 import shlex
 from models.base_model import BaseModel
+from models.user import User
 from models import storage
 
 
@@ -12,7 +13,10 @@ class HBNBCommand(cmd.Cmd):
     """command interpreter's class HBNBCommand"""
 
     prompt = '(hbnb) '
-
+    class_mapping = {
+        "BaseModel": BaseModel,
+        "User": User
+    }
     def do_EOF(self, line):
         """EOF command to exit the program
         """
@@ -29,10 +33,10 @@ class HBNBCommand(cmd.Cmd):
     def do_create(self, line):
         if not line:
             print("** class name missing **")
-        elif line != "BaseModel":
+        elif line not in self.class_mapping:
             print("** class doesn't exist **")
         else:
-            new_model = BaseModel()
+            new_model = self.class_mapping[line]()
             new_model.save()
             print(new_model.id)
 
