@@ -23,6 +23,9 @@ class HBNBCommand(cmd.Cmd):
         """
         return True
 
+    def emptyline(self):
+        return False
+
     def do_create(self, line):
         if not line:
             print("** class name missing **")
@@ -50,7 +53,6 @@ class HBNBCommand(cmd.Cmd):
                 print(value)
                 return
         print("** no instance found **")
-
 
     def do_destroy(self, line):
         if not line:
@@ -84,8 +86,21 @@ class HBNBCommand(cmd.Cmd):
                 lst.append(str(value))
             print(lst)
 
-    def emptyline(self):
-        return False
-
+    def do_update(self, line):
+        if not line:
+            print("** class name missing **")
+            return
+        args = line.split()
+        if args[0] != "BaseModel":
+            print("** class doesn't exist **")
+            return  
+        if len(args) < 2:
+            print("** instance id missing **")
+            return
+        store_dict = storage.all()
+        for key, value in store_dict.items():
+            if value.to_dict()['id'] == args[1]:
+                value.__dict__[args[2]] = args[3]
+    
 if __name__ == '__main__':
     HBNBCommand().cmdloop()
