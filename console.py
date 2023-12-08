@@ -3,7 +3,7 @@
 Program called console.py that contains the entry point of the command interpreter
 """
 import cmd
-import json
+import shlex
 from models.base_model import BaseModel
 from models import storage
 
@@ -90,7 +90,7 @@ class HBNBCommand(cmd.Cmd):
         if not line:
             print("** class name missing **")
             return
-        args = line.split()
+        args = shlex.split(line)
         if args[0] != "BaseModel":
             print("** class doesn't exist **")
             return  
@@ -100,7 +100,16 @@ class HBNBCommand(cmd.Cmd):
         store_dict = storage.all()
         for key, value in store_dict.items():
             if value.to_dict()['id'] == args[1]:
+                if len(args) < 3:
+                    print("** attribute name missing **")
+                    return
+                if len(args) < 4:
+                    print("** value missing **")
+                    return
                 value.__dict__[args[2]] = args[3]
+                value.save()
+                return
+        print("** no instance found **")
     
 if __name__ == '__main__':
     HBNBCommand().cmdloop()
