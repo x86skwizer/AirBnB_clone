@@ -3,6 +3,7 @@
 Program called console.py that contains the entry point of the command interpreter
 """
 import cmd
+import json
 from models.base_model import BaseModel
 from models import storage
 
@@ -70,6 +71,18 @@ class HBNBCommand(cmd.Cmd):
                 storage.reload()
                 return
         print("** no instance found **")
+
+    def do_all(self, line):
+        if not line:
+            print("** class name missing **")
+        elif line != "BaseModel":
+            print("** class doesn't exist **")
+        else:
+            lst = []
+            store_dict = storage.all()
+            for key, value in store_dict.items():
+                lst.append(str(value))
+            print(lst)
 
     def emptyline(self):
         return False
