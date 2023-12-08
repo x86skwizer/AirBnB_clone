@@ -24,7 +24,8 @@ class FileStorage():
         """serializes __objects to the JSON file"""
         tmp = {}
         with open( self.__file_path , "w" ) as write_file:
-            tmp = {key: value.to_dict() for key,value in self.__objects.items()}
+            tmp = {key: value.to_dict()
+                for key,value in self.__objects.items()}
             json.dump(tmp, write_file)
 
     def reload(self):
@@ -32,6 +33,15 @@ class FileStorage():
         try:
             with open( self.__file_path , "r" ) as read_file:
                 from models.base_model import BaseModel
-                self.__objects = {key: BaseModel(**value) for key, value in json.load(read_file).items()}
+                from models.user import User
+                class_mapping = {
+                    "BaseModel": BaseModel,
+                    "User": User
+                }
+                json_data = json.load(read_file)
+                self.__objects = { key: class_mapping[value['__class__']](**value)
+                    for key, value in json_data.items() }
         except (FileNotFoundError):
             pass
+
+
