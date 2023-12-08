@@ -50,6 +50,27 @@ class HBNBCommand(cmd.Cmd):
                 return
         print("** no instance found **")
 
+
+    def do_destroy(self, line):
+        if not line:
+            print("** class name missing **")
+            return
+        args = line.split()
+        if args[0] != "BaseModel":
+            print("** class doesn't exist **")
+            return  
+        if len(args) < 2:
+            print("** instance id missing **")
+            return
+        store_dict = storage.all()
+        for key, value in store_dict.items():
+            if value.to_dict()['id'] == args[1]:
+                del store_dict[key]
+                storage.save()
+                storage.reload()
+                return
+        print("** no instance found **")
+
     def emptyline(self):
         return False
 
