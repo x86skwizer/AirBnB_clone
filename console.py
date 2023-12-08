@@ -3,6 +3,7 @@
 Program called console.py that contains the entry point of the command interpreter
 """
 import cmd
+from models.base_model import BaseModel
 
 
 class HBNBCommand(cmd.Cmd):
@@ -19,6 +20,21 @@ class HBNBCommand(cmd.Cmd):
         """Quit command to exit the program
         """
         return True
+
+    def do_create(self, line):
+        if not line:
+            print("** class name missing **")
+        elif line != "BaseModel":
+            print("** class doesn't exist **")
+        else:
+            new_model = BaseModel()
+            new_model.save()
+            print(new_model.id)
+
+    def do_show(self, line):
+        pass
+
+
 
     def emptyline(self):
         return False
