@@ -1,0 +1,12 @@
+Traceback (most recent call last):
+  File /Users/mberrouk/AirBnB_clone/./test_save_reload_user.py, line 2, in <module>
+    from models import storage
+  File /Users/mberrouk/AirBnB_clone/models/__init__.py, line 5, in <module>
+    from models.engine.file_storage  import FileStorage
+  File /Users/mberrouk/AirBnB_clone/models/engine/file_storage.py, line 7, in <module>
+    from models.base_model import BaseModel
+  File /Users/mberrouk/AirBnB_clone/models/base_model.py, line 10, in <module>
+    from models import storage
+ImportError: cannot import name 'storage' from partially initialized module 'models' (most li
+kely due to a circular import) (/Users/mberrouk/AirBnB_clone/models/__init__.py)
+
