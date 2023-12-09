@@ -45,7 +45,7 @@ class HBNBCommand(cmd.Cmd):
             print("** class name missing **")
             return
         args = line.split()
-        if args[0] != "BaseModel":
+        if args[0] not in self.class_mapping:
             print("** class doesn't exist **")
             return  
         if len(args) < 2:
@@ -61,7 +61,7 @@ class HBNBCommand(cmd.Cmd):
     def do_destroy(self, line):
         if not line:
             print("** class name missing **")
-            return
+            retur
         args = line.split()
         if args[0] != "BaseModel":
             print("** class doesn't exist **")
@@ -81,13 +81,14 @@ class HBNBCommand(cmd.Cmd):
     def do_all(self, line):
         if not line:
             print("** class name missing **")
-        elif line != "BaseModel":
+        elif line not in self.class_mapping:
             print("** class doesn't exist **")
         else:
             lst = []
             store_dict = storage.all()
             for key, value in store_dict.items():
-                lst.append(str(value))
+                if value.to_dict()['__class__'] == line:
+                    lst.append(str(value))
             print(lst)
 
     def do_update(self, line):
