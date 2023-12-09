@@ -36,11 +36,15 @@ class FileStorage():
                 from models.user import User
                 from models.state import State
                 from models.city import City
+                from models.Amenity import Amenity
+                from models.review import Review
                 class_mapping = {
                     "BaseModel": BaseModel,
                     "User": User,
                     'State': State,
-                    "City": City
+                    "City": City,
+                    "Amenity": Amenity,
+                    "Review": Review
                 }
                 json_data = json.load(read_file)
                 self.__objects = { key: class_mapping[value['__class__']](**value)
