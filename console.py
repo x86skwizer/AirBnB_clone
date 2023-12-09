@@ -7,6 +7,7 @@ import shlex
 from models.base_model import BaseModel
 from models.user import User
 from models import storage
+from models.city import City
 
 
 class HBNBCommand(cmd.Cmd):
@@ -15,7 +16,8 @@ class HBNBCommand(cmd.Cmd):
     prompt = '(hbnb) '
     class_mapping = {
         "BaseModel": BaseModel,
-        "User": User
+        "User": User,
+        "City": City
     }
     def do_EOF(self, line):
         """EOF command to exit the program
