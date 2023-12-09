@@ -1,8 +1,11 @@
 #!/usr/bin/python3
-
+"""
+Class responsable in the creation of objects type User
+"""
 from models.base_model import BaseModel
 
 class User(BaseModel):
+    """Definition of class User"""
     email = ""
     password = ""
     first_name = ""
