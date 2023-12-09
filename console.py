@@ -53,9 +53,10 @@ class HBNBCommand(cmd.Cmd):
             return
         store_dict = storage.all()
         for key, value in store_dict.items():
-            if value.to_dict()['id'] == args[1]:
-                print(value)
-                return
+            if value.to_dict()['__class__'] == args[0]: 
+                if value.to_dict()['id'] == args[1]:
+                    print(value)
+                    return
         print("** no instance found **")
 
     def do_destroy(self, line):
@@ -71,11 +72,12 @@ class HBNBCommand(cmd.Cmd):
             return
         store_dict = storage.all()
         for key, value in store_dict.items():
-            if value.to_dict()['id'] == args[1]:
-                del store_dict[key]
-                storage.save()
-                storage.reload()
-                return
+            if value.to_dict()['__class__'] == args[0]: 
+                if value.to_dict()['id'] == args[1]:
+                    del store_dict[key]
+                    storage.save()
+                    storage.reload()
+                    return
         print("** no instance found **")
 
     def do_all(self, line):
@@ -96,7 +98,7 @@ class HBNBCommand(cmd.Cmd):
             print("** class name missing **")
             return
         args = shlex.split(line)
-        if args[0] != "BaseModel":
+        if args[0] not in self.class_mapping:
             print("** class doesn't exist **")
             return  
         if len(args) < 2:
@@ -104,16 +106,17 @@ class HBNBCommand(cmd.Cmd):
             return
         store_dict = storage.all()
         for key, value in store_dict.items():
-            if value.to_dict()['id'] == args[1]:
-                if len(args) < 3:
-                    print("** attribute name missing **")
+            if value.to_dict()['__class__'] == args[0]:
+                if value.to_dict()['id'] == args[1]:
+                    if len(args) < 3:
+                        print("** attribute name missing **")
+                        return
+                    if len(args) < 4:
+                        print("** value missing **")
+                        return
+                    value.__dict__[args[2]] = args[3]
+                    value.save()
                     return
-                if len(args) < 4:
-                    print("** value missing **")
-                    return
-                value.__dict__[args[2]] = args[3]
-                value.save()
-                return
         print("** no instance found **")
     
 if __name__ == '__main__':
