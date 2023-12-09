@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 """
-Class responsable in the creation of objects type amenity
+Class responsable in the creation of objects type City
 """
 from models.base_model import BaseModel
 
