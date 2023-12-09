@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 """
-File contains a class FileStorage that serializes instances 
+File contains a class FileStorage that serializes instances
 to a JSON file and deserializes JSON file to instances
 """
 import json
@@ -37,7 +37,7 @@ class FileStorage():
                 from models.state import State
                 from models.city import City
                 from models.place import Place
-                from models.Amenity import Amenity
+                from models.amenity import Amenity
                 from models.review import Review
                 class_mapping = {
                     "BaseModel": BaseModel,
