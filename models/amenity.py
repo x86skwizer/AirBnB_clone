@@ -1,8 +1,12 @@
 #!/usr/bin/python3
+"""
+Class responsable in the creation of objects type amenity
+"""
 from models.base_model import BaseModel
 
 
 class Amenity(BaseModel):
+    """Definition of class Amenity"""
     name = ""
 
     def __str__(self):
