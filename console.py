@@ -9,6 +9,7 @@ from models.user import User
 from models.state import State
 from models import storage
 from models.city import City
+from models.place import Place
 
 
 class HBNBCommand(cmd.Cmd):
@@ -19,7 +20,8 @@ class HBNBCommand(cmd.Cmd):
         "BaseModel": BaseModel,
         "User": User,
         'State': State,
-        "City": City
+        "City": City,
+        "Place": Place
     }
     def do_EOF(self, line):
         """EOF command to exit the program
