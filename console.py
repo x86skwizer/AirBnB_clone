@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 """
-Program called console.py that contains the entry point of the command interpreter
+Program called console.py that contains
+the entry point of the command interpreter
 """
 import cmd
 import shlex
@@ -27,7 +28,7 @@ class HBNBCommand(cmd.Cmd):
         "Amenity": Amenity,
         "Review": Review
     }
-    
+
     def do_EOF(self, line):
         """EOF command to exit the program
         """
@@ -39,9 +40,12 @@ class HBNBCommand(cmd.Cmd):
         return True
 
     def emptyline(self):
+        """Handle empty line case
+        """
         return False
 
     def do_create(self, line):
+        """creat command function"""
         if not line:
             print("** class name missing **")
         elif line not in self.class_mapping:
@@ -52,38 +56,40 @@ class HBNBCommand(cmd.Cmd):
             print(new_model.id)
 
     def do_show(self, line):
+        """show command function"""
         if not line:
             print("** class name missing **")
             return
         args = line.split()
         if args[0] not in self.class_mapping:
             print("** class doesn't exist **")
-            return  
+            return
         if len(args) < 2:
             print("** instance id missing **")
             return
         store_dict = storage.all()
         for key, value in store_dict.items():
-            if value.to_dict()['__class__'] == args[0]: 
+            if value.to_dict()['__class__'] == args[0]:
                 if value.to_dict()['id'] == args[1]:
                     print(value)
                     return
         print("** no instance found **")
 
     def do_destroy(self, line):
+        """destroy command function"""
         if not line:
             print("** class name missing **")
             retur
         args = line.split()
         if args[0] not in self.class_mapping:
             print("** class doesn't exist **")
-            return  
+            return
         if len(args) < 2:
             print("** instance id missing **")
             return
         store_dict = storage.all()
         for key, value in store_dict.items():
-            if value.to_dict()['__class__'] == args[0]: 
+            if value.to_dict()['__class__'] == args[0]:
                 if value.to_dict()['id'] == args[1]:
                     del store_dict[key]
                     storage.save()
@@ -92,6 +98,7 @@ class HBNBCommand(cmd.Cmd):
         print("** no instance found **")
 
     def do_all(self, line):
+        """all command function"""
         if not line:
             print("** class name missing **")
         elif line not in self.class_mapping:
@@ -105,13 +112,14 @@ class HBNBCommand(cmd.Cmd):
             print(lst)
 
     def do_update(self, line):
+        """update command function"""
         if not line:
             print("** class name missing **")
             return
         args = shlex.split(line)
         if args[0] not in self.class_mapping:
             print("** class doesn't exist **")
-            return  
+            return
         if len(args) < 2:
             print("** instance id missing **")
             return
@@ -129,6 +137,8 @@ class HBNBCommand(cmd.Cmd):
                     value.save()
                     return
         print("** no instance found **")
-    
+
+
 if __name__ == '__main__':
+    """Main function for the console"""
     HBNBCommand().cmdloop()
