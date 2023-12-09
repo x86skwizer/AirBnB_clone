@@ -6,6 +6,7 @@ import cmd
 import shlex
 from models.base_model import BaseModel
 from models.user import User
+from models.state import State
 from models import storage
 from models.city import City
 
@@ -17,6 +18,7 @@ class HBNBCommand(cmd.Cmd):
     class_mapping = {
         "BaseModel": BaseModel,
         "User": User,
+        'State': State,
         "City": City
     }
     def do_EOF(self, line):

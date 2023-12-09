@@ -34,10 +34,12 @@ class FileStorage():
             with open( self.__file_path , "r" ) as read_file:
                 from models.base_model import BaseModel
                 from models.user import User
+                from models.state import State
                 from models.city import City
                 class_mapping = {
                     "BaseModel": BaseModel,
                     "User": User,
+                    'State': State,
                     "City": City
                 }
                 json_data = json.load(read_file)
