@@ -33,9 +33,6 @@ class TestHBNBCommand_prompting(unittest.TestCase):
             self.assertEqual("", output.getvalue().strip())
 
 
-class TestHBNBCommand_help(unittest.TestCase):
-    """Unittests for testing help messages of the HBNB command interpreter."""
-
 class TestHBNBCommand_exit(unittest.TestCase):
     """Unittests for testing exiting from the HBNB command interpreter."""
 
@@ -46,6 +43,7 @@ class TestHBNBCommand_exit(unittest.TestCase):
     def test_EOF_exits(self):
         with patch("sys.stdout", new=StringIO()) as output:
             self.assertTrue(HBNBCommand().onecmd("EOF"))
+
 
 class TestHBNBCommand_create(unittest.TestCase):
     """Unittests for testing create from the HBNB command interpreter."""
@@ -128,6 +126,7 @@ class TestHBNBCommand_create(unittest.TestCase):
             testKey = "Review.{}".format(output.getvalue().strip())
             self.assertIn(testKey, storage.all().keys())
 
+
 class TestHBNBCommand_show(unittest.TestCase):
     """Unittests for testing show from the HBNB command interpreter"""
 
@@ -149,7 +148,6 @@ class TestHBNBCommand_show(unittest.TestCase):
             os.rename("tmp", "file.json")
         except IOError:
             pass
-
 
     def test_show_missing_id_space_notation(self):
         correct = "** instance id missing **"
@@ -198,7 +196,6 @@ class TestHBNBCommand_show(unittest.TestCase):
         with patch("sys.stdout", new=StringIO()) as output:
             self.assertFalse(HBNBCommand().onecmd("show Review 1"))
             self.assertEqual(correct, output.getvalue().strip())
-
 
     def test_show_objects_space_notation(self):
         with patch("sys.stdout", new=StringIO()) as output:
@@ -257,7 +254,6 @@ class TestHBNBCommand_show(unittest.TestCase):
             command = "show Review {}".format(testID)
             self.assertFalse(HBNBCommand().onecmd(command))
             self.assertEqual(obj.__str__(), output.getvalue().strip())
-
 
 
 class TestHBNBCommand_destroy(unittest.TestCase):

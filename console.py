@@ -99,13 +99,14 @@ class HBNBCommand(cmd.Cmd):
                 if value.to_dict()['id'] == args[1]:
                     del store_dict[key]
                     storage.save()
-                    # storage.reload()
+                    storage.reload()
                     return
         print("** no instance found **")
 
     def do_all(self, line):
         """all command function
         """
+        storage.reload()
         if not line:
             print("** class name missing **")
             return
