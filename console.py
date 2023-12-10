@@ -46,8 +46,7 @@ class HBNBCommand(cmd.Cmd):
         pass
 
     def do_create(self, line):
-        """ Creates a new instance of the basemodel class
-        Structure: create [class name]
+        """Creat command function
         """
         if not line:
             print("** class name missing **")
@@ -66,7 +65,7 @@ class HBNBCommand(cmd.Cmd):
         if not line:
             print("** class name missing **")
             return
-        args = line.split()
+        args = shlex.split(line)
         if args[0] not in self.class_mapping:
             print("** class doesn't exist **")
             return
