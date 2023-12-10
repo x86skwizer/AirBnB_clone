@@ -4,7 +4,7 @@ File contains a class FileStorage that serializes instances
 to a JSON file and deserializes JSON file to instances
 """
 import json
-
+import os
 
 class FileStorage():
     """Class serialize instances to JSON file"""
@@ -31,15 +31,15 @@ class FileStorage():
 
     def reload(self):
         """deserializes the JSON file to __objects"""
+        from models.base_model import BaseModel
+        from models.user import User
+        from models.state import State
+        from models.city import City
+        from models.place import Place
+        from models.amenity import Amenity
+        from models.review import Review
         try:
             with open(self.__file_path, "r") as read_file:
-                from models.base_model import BaseModel
-                from models.user import User
-                from models.state import State
-                from models.city import City
-                from models.place import Place
-                from models.amenity import Amenity
-                from models.review import Review
                 class_mapping = {
                     "BaseModel": BaseModel,
                     "User": User,
@@ -49,6 +49,8 @@ class FileStorage():
                     "Place": Place,
                     "Review": Review
                 }
+                if os.path.getsize(self.__file_path) == 0:
+                    return
                 json_data = json.load(read_file)
                 self.__objects = {key:
                                   class_mapping[value['__class__']](**value)
