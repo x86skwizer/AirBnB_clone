@@ -49,10 +49,12 @@ class HBNBCommand(cmd.Cmd):
         """creat command function"""
         if not line:
             print("** class name missing **")
-        elif line not in self.class_mapping:
+            return
+        args = shlex.split(line)
+        if args[0] not in self.class_mapping:
             print("** class doesn't exist **")
         else:
-            new_model = self.class_mapping[line]()
+            new_model = self.class_mapping[args[0]]()
             new_model.save()
             print(new_model.id)
 
