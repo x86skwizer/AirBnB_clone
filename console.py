@@ -46,7 +46,8 @@ class HBNBCommand(cmd.Cmd):
         pass
 
     def do_create(self, line):
-        """creat command function"""
+        """Creat command function
+        """
         if not line:
             print("** class name missing **")
             return
@@ -59,7 +60,8 @@ class HBNBCommand(cmd.Cmd):
             print(new_model.id)
 
     def do_show(self, line):
-        """show command function"""
+        """show command function
+        """
         if not line:
             print("** class name missing **")
             return
@@ -79,7 +81,8 @@ class HBNBCommand(cmd.Cmd):
         print("** no instance found **")
 
     def do_destroy(self, line):
-        """destroy command function"""
+        """destroy command function
+        """
         if not line:
             print("** class name missing **")
             retur
@@ -101,7 +104,8 @@ class HBNBCommand(cmd.Cmd):
         print("** no instance found **")
 
     def do_all(self, line):
-        """all command function"""
+        """all command function
+        """
         if not line:
             print("** class name missing **")
         elif line not in self.class_mapping:
@@ -115,7 +119,8 @@ class HBNBCommand(cmd.Cmd):
             print(lst)
 
     def do_update(self, line):
-        """update command function"""
+        """update command function
+        """
         if not line:
             print("** class name missing **")
             return
