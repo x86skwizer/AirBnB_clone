@@ -46,7 +46,8 @@ class HBNBCommand(cmd.Cmd):
         pass
 
     def do_create(self, line):
-        """Creat command function
+        """ Creates a new instance of the basemodel class
+        Structure: create [class name]
         """
         if not line:
             print("** class name missing **")
