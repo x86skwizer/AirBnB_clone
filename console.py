@@ -138,10 +138,10 @@ class HBNBCommand(cmd.Cmd):
             if value.to_dict()['__class__'] == args[0]:
                 if value.to_dict()['id'] == args[1]:
                     if len(args) < 3:
-                        print("** attribute name missing **")
+                        print("** no instance found **")
                         return
                     if len(args) < 4:
-                        print("** value missing **")
+                        print("** no instance found **")
                         return
                     value.__dict__[args[2]] = args[3]
                     value.save()
