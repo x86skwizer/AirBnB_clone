@@ -86,7 +86,7 @@ class HBNBCommand(cmd.Cmd):
         if not line:
             print("** class name missing **")
             retur
-        args = line.split()
+        args = shlex.split(line)
         if args[0] not in self.class_mapping:
             print("** class doesn't exist **")
             return
@@ -108,15 +108,16 @@ class HBNBCommand(cmd.Cmd):
         """
         if not line:
             print("** class name missing **")
-        elif line not in self.class_mapping:
+        args = shlex.split(line)
+        if args[0] not in self.class_mapping:
             print("** class doesn't exist **")
         else:
             lst = []
             store_dict = storage.all()
             for key, value in store_dict.items():
-                if value.to_dict()['__class__'] == line:
+                if value.to_dict()['__class__'] == args[0]:
                     lst.append(str(value))
-            print(lst)
+                print(lst)
 
     def do_update(self, line):
         """update command function
