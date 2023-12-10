@@ -99,7 +99,7 @@ class HBNBCommand(cmd.Cmd):
                 if value.to_dict()['id'] == args[1]:
                     del store_dict[key]
                     storage.save()
-                    storage.reload()
+                    # storage.reload()
                     return
         print("** no instance found **")
 
@@ -108,6 +108,7 @@ class HBNBCommand(cmd.Cmd):
         """
         if not line:
             print("** class name missing **")
+            return
         args = shlex.split(line)
         if args[0] not in self.class_mapping:
             print("** class doesn't exist **")
