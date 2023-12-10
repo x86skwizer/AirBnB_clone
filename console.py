@@ -106,7 +106,6 @@ class HBNBCommand(cmd.Cmd):
     def do_all(self, line):
         """all command function
         """
-        storage.reload()
         if not line:
             print("** class name missing **")
             return
