@@ -43,7 +43,7 @@ class HBNBCommand(cmd.Cmd):
     def emptyline(self):
         """Handle empty line case
         """
-        return False
+        pass
 
     def do_create(self, line):
         """creat command function"""
