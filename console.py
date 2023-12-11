@@ -59,10 +59,12 @@ class HBNBCommand(cmd.Cmd):
         if '(' in args[1]:
             arg_parts = args[1].split('(')
             command_parts = arg_parts[1].split(')')
+            command_p = command_parts[0].split(',')
+            str_com = " ".join(str(e) for e in command_p)
             if len(command_parts) > 1:
                 command = [arg_parts[0], args[0], command_parts[0]]
                 if command[0] in class_mapping.keys():
-                    call = "{} {}".format(args[0], command[2])
+                    call = "{} {}".format(args[0], str_com)
                     return class_mapping[command[0]](call)
         print("*** Unknown syntax: {}".format(line))
 
