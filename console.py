@@ -56,11 +56,15 @@ class HBNBCommand(cmd.Cmd):
             cmd.Cmd.default(self, line)
             return
         name_class = args[0]
-        command = args[1].split("(")[0]
-        if (command in class_mapping.keys()):
-            class_mapping[command](args[0])
-            return
-        print('*** Unknown syntax:', line)
+        if '(' in args[1]:
+            arg_parts = args[1].split('(')
+            command_parts = arg_parts[1].split(')')
+            if len(command_parts) > 1:
+                command = [arg_parts[0], args[0], command_parts[0]]
+                if command[0] in class_mapping.keys():
+                    call = "{} {}".format(args[0], command[2])
+                    return class_mapping[command[0]](call)
+        print("*** Unknown syntax: {}".format(line))
 
     def do_count(self, line):
         """Count instanes of a class:
