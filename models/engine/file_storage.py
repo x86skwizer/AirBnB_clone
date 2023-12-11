@@ -6,6 +6,7 @@ to a JSON file and deserializes JSON file to instances
 import json
 import os
 
+
 class FileStorage():
     """Class serialize instances to JSON file"""
 
@@ -50,6 +51,7 @@ class FileStorage():
                     "Review": Review
                 }
                 if os.path.getsize(self.__file_path) == 0:
+                    self.__objects = {}
                     return
                 json_data = json.load(read_file)
                 self.__objects = {key:
