@@ -159,7 +159,8 @@ class HBNBCommand(cmd.Cmd):
             for key, value in store_dict.items():
                 if value.to_dict()['__class__'] == args[0]:
                     lst.append(str(value))
-            print(lst)
+            if lst:
+                print(lst)
 
     def do_update(self, line):
         """update command function
