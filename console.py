@@ -100,7 +100,6 @@ class HBNBCommand(cmd.Cmd):
             print(new_model.id)
 
     def do_show(self, line):
-        print(type(line))
         """show command function
         """
         if not line:
