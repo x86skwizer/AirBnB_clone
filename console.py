@@ -80,7 +80,6 @@ class HBNBCommand(cmd.Cmd):
                 n = n + 1
         print(n)
 
-
     def emptyline(self):
         """Handle empty line case
         """
@@ -101,6 +100,7 @@ class HBNBCommand(cmd.Cmd):
             print(new_model.id)
 
     def do_show(self, line):
+        print(type(line))
         """show command function
         """
         if not line:
@@ -188,7 +188,6 @@ class HBNBCommand(cmd.Cmd):
                     value.save()
                     return
         print("** no instance found **")
-
 
 
 if __name__ == '__main__':
