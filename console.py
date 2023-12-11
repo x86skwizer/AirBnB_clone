@@ -40,6 +40,57 @@ class HBNBCommand(cmd.Cmd):
         """
         return True
 
+    def default(self, line):
+        """handle Class name input
+        """
+        class_mapping = {
+            "all": self.do_all,
+            # "count": self.do_count,
+            "show": self.do_show,
+            "destroy": self.do_destroy,
+            "update": self.do_update
+        }
+        args = line.strip()
+        args = args.split(".")
+        if len(args) != 2:
+            cmd.Cmd.default(self, line)
+            return
+        name_class = args[0]
+        command = args[1].split("(")[0]
+        if (command in class_mapping.keys()):
+            class_mapping[command](args[0])
+            return
+        print('*** Unknown syntax:', line)
+    # def default(self, line):
+    #     """Handles <class name>.all() command"""
+    #     # class_mapping = {
+    #     #     "all": self.do_all,
+    #     #     # "count": self.do_count,
+    #     #     "show": self.do_show,
+    #     #     "destroy": self.do_destroy,
+    #     #     "update": self.do_update
+    #     # }
+    #     class_mapping = {
+    #         "BaseModel": BaseModel,
+    #         "User": User,
+    #         'State': State,
+    #         "City": City,
+    #         "Place": Place,
+    #         "Amenity": Amenity,
+    #         "Review": Review
+    #     }
+    #     parts = line.split('.')
+    #     print(parts)
+    #     if len(parts) == 2 and parts[1] == 'all()':
+    #         class_name = parts[0]
+    #         if class_name in class_mapping:
+    #             instances = class_mapping[class_name].all()
+    #             for instance in instances:
+    #                 print(instance)
+    #         else:
+    #             print("** class doesn't exist **")
+    #     else:
+
     def emptyline(self):
         """Handle empty line case
         """
@@ -118,7 +169,7 @@ class HBNBCommand(cmd.Cmd):
             for key, value in store_dict.items():
                 if value.to_dict()['__class__'] == args[0]:
                     lst.append(str(value))
-                print(lst)
+            print(lst)
 
     def do_update(self, line):
         """update command function
@@ -138,15 +189,16 @@ class HBNBCommand(cmd.Cmd):
             if value.to_dict()['__class__'] == args[0]:
                 if value.to_dict()['id'] == args[1]:
                     if len(args) < 3:
-                        print("** no instance found **")
+                        print("** attribute name missing **")
                         return
                     if len(args) < 4:
-                        print("** no instance found **")
+                        print("** value missing **")
                         return
                     value.__dict__[args[2]] = args[3]
                     value.save()
                     return
         print("** no instance found **")
+
 
 
 if __name__ == '__main__':
