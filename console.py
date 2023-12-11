@@ -45,7 +45,7 @@ class HBNBCommand(cmd.Cmd):
         """
         class_mapping = {
             "all": self.do_all,
-            # "count": self.do_count,
+            "count": self.do_count,
             "show": self.do_show,
             "destroy": self.do_destroy,
             "update": self.do_update
@@ -61,35 +61,25 @@ class HBNBCommand(cmd.Cmd):
             class_mapping[command](args[0])
             return
         print('*** Unknown syntax:', line)
-    # def default(self, line):
-    #     """Handles <class name>.all() command"""
-    #     # class_mapping = {
-    #     #     "all": self.do_all,
-    #     #     # "count": self.do_count,
-    #     #     "show": self.do_show,
-    #     #     "destroy": self.do_destroy,
-    #     #     "update": self.do_update
-    #     # }
-    #     class_mapping = {
-    #         "BaseModel": BaseModel,
-    #         "User": User,
-    #         'State': State,
-    #         "City": City,
-    #         "Place": Place,
-    #         "Amenity": Amenity,
-    #         "Review": Review
-    #     }
-    #     parts = line.split('.')
-    #     print(parts)
-    #     if len(parts) == 2 and parts[1] == 'all()':
-    #         class_name = parts[0]
-    #         if class_name in class_mapping:
-    #             instances = class_mapping[class_name].all()
-    #             for instance in instances:
-    #                 print(instance)
-    #         else:
-    #             print("** class doesn't exist **")
-    #     else:
+
+    def do_count(self, line):
+        """Count instanes of a class:
+        Usage: <class name>.count().
+        """
+        if not line:
+            print("** class name missing **")
+            return
+        args = shlex.split(line)
+        if args[0] not in self.class_mapping:
+            print("** class doesn't exist **")
+            return
+        store_dict = storage.all()
+        n = 0
+        for key, value in store_dict.items():
+            if value.to_dict()['__class__'] == args[0]:
+                n = n + 1
+        print(n)
+
 
     def emptyline(self):
         """Handle empty line case
