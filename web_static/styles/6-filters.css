@@ -24,10 +24,10 @@
 	opacity: 90%;
 }
 
+
 .filters div {
 	height: 100%;
 	width: 25%;
-	margin-left: 40px;
 }
 
 .filters div:first-of-type {
@@ -37,24 +37,23 @@
 h3 {
 	font-weight: 600;
 	margin-bottom: 0%;
+	padding-left: 40px;
 }
 
 h4 {
 	font-weight: 400;
 	font-size: 14px;
+	padding-left: 40px;
 	margin-top: 0%;
 }
 
 .filters div .popover {
 	background-color: #FAFAFA;
 	border: 1px solid #DDDDDD;
-	border-radius: 4px;
-	width: 100%;
 	display: none;
+	border-radius: 4px;
 	list-style: none;
 	margin-top: 0%;
-	float: right;
-	padding-left: 40px;
 	padding-bottom: 30px;
 	padding-top: 25px;
 }
@@ -62,11 +61,15 @@ h4 {
 h2 {
 	font-size: 16px;
 	margin-bottom: 0%;
-	text-align: left;
 }
 
 li {
 	list-style: none;
+	margin-left: -20px;
+}
+
+.amenities ul{
+	padding-left: 25%;
 }
 
 .locations:hover .popover,
